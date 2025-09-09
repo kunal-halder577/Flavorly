@@ -8,4 +8,10 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
+  server: {
+    host: true, // allows network access
+    strictPort: false,
+    // Allow all hosts (needed for tunnels like Cloudflare)
+    allowedHosts: 'all'
+  }
 })

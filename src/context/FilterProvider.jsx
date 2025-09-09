@@ -35,7 +35,7 @@ export default function FilterProvider({children}) {
     const randomResults = useRandomRecipes();
     const {searchResults, searchResultHandler, loading:initialLoading} = pathResults ?? randomResults;
     const [searchResultLoading, setSearchResultLoading] = useState(false);
-    const [appliedFilters, setAppliedFilters] = useState(
+    const [selectedFilters, setSelectedFilters] = useState(
         // {
         //     cuisine: {
         //         popular: [],
@@ -52,6 +52,7 @@ export default function FilterProvider({children}) {
         // }
         () => parseFilters(searchParam)
     )
+    const [appliedFilters, setAppliedFilters] = useState({});
     // useEffect(() => {
     //     const current = Object.fromEntries(searchParam.entries()); // existing params
     //     const serializedFilters = serializeFilters(appliedFilters); // only filters
@@ -65,7 +66,7 @@ export default function FilterProvider({children}) {
     //     );
     // }, [appliedFilters, setSearchParam]);
     useEffect(() => {
-        const serializedFilters = serializeFilters(appliedFilters);
+        const serializedFilters = serializeFilters(selectedFilters);
 
         // clone all existing params into a plain object
         const current = Object.fromEntries(searchParam.entries());
@@ -87,7 +88,7 @@ export default function FilterProvider({children}) {
         });
 
         setSearchParam(newParams, { replace: true });
-    }, [appliedFilters, searchParam, setSearchParam]);
+    }, [selectedFilters, searchParam, setSearchParam]);
 
     const [prepTime, setPrepTime] = useState(() => parseTime(searchParam))
     useEffect(() => {
@@ -163,10 +164,10 @@ export default function FilterProvider({children}) {
     const handleSelect = useCallback((filterType = "") => ({source="", filter={}}) => {
         if(!filter.id) return;
         setSearchQuery(searchQuery => ({...searchQuery, [filterType]: ""}));
-        const existingFilters = (appliedFilters?.[filterType]?.[source]) || [];
+        const existingFilters = (selectedFilters?.[filterType]?.[source]) || [];
         const doesFilterExist = existingFilters.some(existingFilter => existingFilter.id === filter.id);
         if(!doesFilterExist) {
-            setAppliedFilters(prev => (
+            setSelectedFilters(prev => (
                 {
                     ...prev,
                     [filterType]: {
@@ -176,10 +177,10 @@ export default function FilterProvider({children}) {
                 }
             ))
         }
-    }, [appliedFilters])
-    const handleCuisineSelect = useMemo(() => handleSelect('cuisine'), [appliedFilters])
-    const handleDietSelect = useMemo(() => handleSelect("diet"), [appliedFilters])
-    const handleMealTypeSelect = useMemo(() => handleSelect("mealtype"), [appliedFilters])
+    }, [selectedFilters])
+    const handleCuisineSelect = useMemo(() => handleSelect('cuisine'), [selectedFilters])
+    const handleDietSelect = useMemo(() => handleSelect("diet"), [selectedFilters])
+    const handleMealTypeSelect = useMemo(() => handleSelect("mealtype"), [selectedFilters])
     const handleIncludedIngredientSelect = (ingredient) => {
         handleIngredientSearchQuery("")
         if(ingredient && typeof ingredient === "object") {
@@ -210,10 +211,10 @@ export default function FilterProvider({children}) {
     //     ))
     // }, [appliedFilters])
     const handleDelete = useCallback((filterType = "") => (source="", id="") => {
-        const existingFilters = appliedFilters[filterType]?.[source] || [];
+        const existingFilters = selectedFilters[filterType]?.[source] || [];
         const afterRemoving = existingFilters.filter(filter => filter.id !== id);
 
-        setAppliedFilters(prev => {
+        setSelectedFilters(prev => {
             const updatedSource = { ...prev[filterType] };
 
             if (afterRemoving.length === 0) {
@@ -227,11 +228,11 @@ export default function FilterProvider({children}) {
             [filterType]: updatedSource
             };
         });
-    }, [appliedFilters]);
+    }, [selectedFilters]);
 
-    const handleCuisineDelete = useMemo(() => handleDelete("cuisine"), [appliedFilters])
-    const handleDietDelete = useMemo(() => handleDelete("diet"), [appliedFilters])
-    const handleMealTypeDelete = useMemo(() => handleDelete("mealtype"), [appliedFilters])
+    const handleCuisineDelete = useMemo(() => handleDelete("cuisine"), [selectedFilters])
+    const handleDietDelete = useMemo(() => handleDelete("diet"), [selectedFilters])
+    const handleMealTypeDelete = useMemo(() => handleDelete("mealtype"), [selectedFilters])
     const handleIncludedIngredientDelete = (id) => {
         const filteredIncludedItems = includedIngredients.filter(ingredient => (
             ingredient.id !== id
@@ -270,10 +271,12 @@ export default function FilterProvider({children}) {
                 handleSearchResultLoading,
                 handleDishSearchQuery,
                 handleSearchResults,
+                setAppliedFilters,
                 searchResults,
                 resultLoading,
                 includedIngredients,
                 excludedIngredients,
+                selectedFilters,
                 appliedFilters,
                 prepTime,
                 searchQuery

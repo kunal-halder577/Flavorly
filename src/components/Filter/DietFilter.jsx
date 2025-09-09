@@ -3,7 +3,7 @@ import { useContext } from "react";
 import FilterContext from "../../context/FilterContext";
 
 export default function DietFilter() {
-    const {searchQuery, handleDietSearchQuery, handleDietSelect, handleDietDelete, appliedFilters} = useContext(FilterContext);
+    const {searchQuery, handleDietSearchQuery, handleDietSelect, handleDietDelete, selectedFilters} = useContext(FilterContext);
 
     return (
         <CustomFilter
@@ -13,7 +13,7 @@ export default function DietFilter() {
             handleSearchQuery={handleDietSearchQuery}
             handleSelect={handleDietSelect}
             handleDelete={handleDietDelete}
-            badgeList={appliedFilters.diet.others}
+            badgeList={selectedFilters.diet.others}
             placeholder="Search diet..."
         />
     )

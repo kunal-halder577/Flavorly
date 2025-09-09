@@ -5,57 +5,7 @@ export function cn(...inputs) {
   return clsx(...inputs);
 }
 const capitalize = str => str.charAt(0).toUpperCase().concat(str.slice(1));
-// export function parseFilters(searchParams, lookup) {
-//   const filters = {
-//     cuisine: { popular: [], others: [] },
-//     diet: { popular: [], others: [] },
-//     mealtype: { popular: [], others: [] }
-//   };
 
-//   for (const [key, value] of searchParams.entries()) {
-//     const [filterType, category] = key.split(".");
-//     if (filters[filterType] && filters[filterType][category]) {
-//       const labels = value.split(",").map(v => v.trim());
-//       // reconstruct objects from lookup
-//       filters[filterType][category] = labels
-//         .map(label => lookup?.[filterType]?.[label]
-//         .filter(Boolean)
-//       )
-//     }
-//   }
-
-//   return filters;
-// }
-// export function serializeFilters(filters) {
-//   const params = {};
-
-//   Object.entries(filters).forEach(([filterType, categories]) => {
-//     Object.entries(categories).forEach(([category, values]) => {
-//       if (values.length > 0) {
-  
-//         params[`${filterType}.${category}`] = values
-//           .map(v => v.label)
-//           .filter(Boolean)
-//           .join(",");
-//       }
-//     });
-//   });
-
-//   return params;
-// }
-// export function serializeFilters(filters) {
-//   const params = {};
-
-//   Object.entries(filters).forEach(([filterType, categories]) => {
-//     Object.entries(categories).forEach(([category, values]) => {
-//       if (values.length > 0) {
-//         params[`${filterType}.${category}`] = values.map(v => v.id).filter(Boolean).join(",");
-//       }
-//     });
-//   });
-
-//   return params;
-// }
 export function serializeFilters(filters) {
   const params = {};
 
@@ -70,7 +20,6 @@ export function serializeFilters(filters) {
 
   return params;
 }
-
 export function parseFilters(searchParams) {
   const filters = {
     cuisine: { popular: [], others: [] },
@@ -84,7 +33,7 @@ export function parseFilters(searchParams) {
       const ids = value.split(",").map(v => v.trim());
       filters[filterType][category] = ids.map(id => ({ 
         id: id.trim().toLowerCase(),
-        label: capitalize(id)
+        label: capitalize(id.replace(/-/g, " "))
       }));
     }
   }
@@ -124,7 +73,4 @@ export function mergeArr(appliedFilters) {
       otherDiet,
       otherMealTypes
     }
-}
-export function serializeTime(searchParams) {
-
 }

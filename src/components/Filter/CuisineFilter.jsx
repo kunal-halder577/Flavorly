@@ -3,7 +3,7 @@ import CustomFilter from "./CustomFilter";
 import FilterContext from "../../context/FilterContext";
 
 export default function CuisineFilter() {
-    const {searchQuery, handleCuisineSearchQuery, handleCuisineSelect, handleCuisineDelete, appliedFilters} = useContext(FilterContext);
+    const {searchQuery, handleCuisineSearchQuery, handleCuisineSelect, handleCuisineDelete, selectedFilters} = useContext(FilterContext);
     return (
         <CustomFilter
             label="Cuisine"
@@ -12,7 +12,7 @@ export default function CuisineFilter() {
             handleSearchQuery={handleCuisineSearchQuery}
             handleSelect={handleCuisineSelect}
             handleDelete={handleCuisineDelete}
-            badgeList={appliedFilters.cuisine.others}
+            badgeList={selectedFilters.cuisine.others}
             placeholder="Search cuisines..."
         />
     )

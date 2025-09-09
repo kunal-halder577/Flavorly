@@ -11,10 +11,11 @@ import { useSearchParams } from "react-router-dom";
 
 export default function Filter() {
     const [searchParams, setSearchParams] = useSearchParams();
-    const {handleSearchResults, handleSearchResultLoading, appliedFilters, prepTime, includedIngredients, excludedIngredients } = useContext(FilterContext);
-    const {popularCuisine, otherCuisine, popularDiet, otherDiet, popularMealTypes, otherMealTypes} = mergeArr(appliedFilters);
+    const {handleSearchResults, handleSearchResultLoading, selectedFilters, prepTime, includedIngredients, excludedIngredients, appliedFilters, setAppliedFilters, searchQuery } = useContext(FilterContext);
+    const {popularCuisine, otherCuisine, popularDiet, otherDiet, popularMealTypes, otherMealTypes} = mergeArr(selectedFilters);
 
     const filters = {
+        query: searchQuery.dish,
         cuisine: [...popularCuisine, ...otherCuisine].join(','),
         diet: [...popularDiet, ...otherDiet].join(','),
         mealtype: [...popularMealTypes, ...otherMealTypes].join(','),
@@ -24,8 +25,13 @@ export default function Filter() {
     }
     const handleFilteredSearch = (number = 16) => {
         handleSearchResultLoading(true);
+        if(JSON.stringify(filters) === JSON.stringify(appliedFilters)) {
+            handleSearchResultLoading(false)
+            return;
+        }
         const current = Object.fromEntries(searchParams.entries());
         setSearchParams({...current, page: 1});
+        setAppliedFilters(filters);
         getFilteredSearchResults(filters, number)
         .then(data => {
             handleSearchResults(data);

@@ -15,6 +15,7 @@ export async function getSearchResult(query = "", number=10) {
 }
 export async function getFilteredSearchResults(filters={}, number=16) {
     const queries = {
+        query: filters.query,
         cuisine: filters.cuisine,
         diet: filters.diet,
         type: filters.mealtype,

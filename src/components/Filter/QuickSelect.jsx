@@ -9,7 +9,7 @@ export default function QuickSelect({
     handleDelete=()=> {},
     className=""
 }) {
-    const { appliedFilters } = useContext(FilterContext);
+    const { selectedFilters } = useContext(FilterContext);
     const quickFilter = staticData[type].popular;
     const getId = (name) => name.trim().toLowerCase().replace(/\s+/g, "-");
 
@@ -17,14 +17,14 @@ export default function QuickSelect({
         <div className={`flex flex-wrap w-full gap-2 ${className}`}>
             {quickFilter.map((label) => {
                 const id = getId(label);
-                const isSelected = appliedFilters?.[type]?.popular?.some(f => f.id === id) || false;
+                const isSelected = selectedFilters?.[type]?.popular?.some(f => f.id === id) || false;
                 return <Badge
                             key={id}
                             id={id}
                             label={label}
                             cancelAvail={false}
                             isSelected={isSelected}
-                            handleSelect={() => {handleSelect({source:"popular", filter:{id, label}});console.log(appliedFilters?.[type]?.popular)}}
+                            handleSelect={() => {handleSelect({source:"popular", filter:{id, label}});console.log(selectedFilters?.[type]?.popular)}}
                             handleDelete={() => {handleDelete("popular", id)}}
                         />
             })}

@@ -13,8 +13,10 @@ export default function usePathResults(number=100) {
     const time = parseTime(searchParams);
     const includedIngredients = parseIngredients(searchParams, "included");
     const excludedIngredients = parseIngredients(searchParams, "excluded");
+    const dish = searchParams.get("dish");
     const filterString = useMemo(() => {
         const params = {
+            query: dish,
             cuisine: [...popularCuisine, ...otherCuisine].join(','),
             diet: [...popularDiet, ...otherDiet].join(','),
             type: [...popularMealTypes, ...otherMealTypes].join(','), // API expects "type"
@@ -30,7 +32,6 @@ export default function usePathResults(number=100) {
 
         return new URLSearchParams(params).toString();
     }, [popularCuisine, otherCuisine, popularDiet, otherDiet, popularMealTypes, otherMealTypes, time, includedIngredients, excludedIngredients]);
-    const dish = searchParams.get("dish");
 
     useEffect(() => {
         const controller = new AbortController();

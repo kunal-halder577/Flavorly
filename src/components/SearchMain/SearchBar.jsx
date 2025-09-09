@@ -3,25 +3,44 @@ import Input from "../Input";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import { faSearch, faXmark } from '@fortawesome/free-solid-svg-icons';
 import FilterContext from "../../context/FilterContext";
-import { getSearchResult } from "../../api";
+import { getFilteredSearchResults } from "../../api";
 import { useSearchParams } from "react-router-dom";
+import { mergeArr } from "../../lib/utils";
 
 export default function SearchBar({
     className="",
     handleSearchQuery=()=>{}
 }) {
     const [searchParams, setSearchParams] = useSearchParams();
-    const {searchQuery, handleDishSearchQuery, handleSearchResults, handleSearchResultLoading} = useContext(FilterContext);
-    async function handleSearch(query = "", number=16) {
-        handleSearchResults([]);
+    const {searchQuery, handleDishSearchQuery, handleSearchResults, handleSearchResultLoading, searchResults, selectedFilters, appliedFilters, setAppliedFilters, prepTime, includedIngredients, excludedIngredients} = useContext(FilterContext);
+
+    const {popularCuisine, otherCuisine, popularDiet, otherDiet, popularMealTypes, otherMealTypes} = mergeArr(selectedFilters);
+    const filters = {
+        query: searchQuery.dish,
+        cuisine: [...popularCuisine, ...otherCuisine].join(','),
+        diet: [...popularDiet, ...otherDiet].join(','),
+        mealtype: [...popularMealTypes, ...otherMealTypes].join(','),
+        prepTime: prepTime.time,
+        includedIngredients: includedIngredients.map(i => i.label).join(','),
+        excludedIngredients: excludedIngredients.map(i => i.label).join(',')
+    }
+    async function handleSearch(number=16) {
+        const results = JSON.stringify(filters) !== JSON.stringify(appliedFilters)? [] : searchResults;
+        handleSearchResults(results);
         handleSearchResultLoading(true);
+        if(JSON.stringify(filters) === JSON.stringify(appliedFilters)) {
+            handleSearchResultLoading(false);
+            return;
+        }
         const current = Object.fromEntries(searchParams.entries());
         setSearchParams({...current, page: 1})
+        setAppliedFilters(filters);
         try {
-            const res = await getSearchResult(query, number);
+            const res = await getFilteredSearchResults(filters, number);
             handleSearchResults(res);
         } catch(err) {
             console.error(err)
+            handleSearchResults([])
         } finally {
             handleSearchResultLoading(false);
         }
@@ -38,13 +57,13 @@ export default function SearchBar({
                     onChange={(e) => handleDishSearchQuery(e.target.value)} 
                     onKeyDown={(e) => {
                         if(e.key === 'Enter') {
-                            handleSearch(searchQuery.dish)
+                            handleSearch(100)
                         }
                     }}
                 />
                 <button 
                         className={`w-[7%] h-full focus:ring-2 focus:ring-black cursor-pointer duration-200 ease-in-out hover:bg-gray-50`} 
-                        onClick={() => handleSearch(searchQuery.dish, 100)}
+                        onClick={() => handleSearch(100)}
                     >
                     <FontAwesomeIcon 
                         icon={faSearch}
