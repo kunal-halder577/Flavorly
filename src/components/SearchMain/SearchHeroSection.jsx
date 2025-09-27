@@ -12,7 +12,7 @@ export function SearchHeroSection({
                 <p className="text-gray-500 text-2xl font-poppins">Search by ingredients, meal type, or dietary preference.</p>
             </div>
             <div className="flex justify-center">
-                <SearchBar className="w-5/6"/>
+                <SearchBar className="w-5/6 lg:w-4/6"/>
             </div>
         </div>
     )

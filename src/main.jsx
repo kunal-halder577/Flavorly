@@ -3,9 +3,10 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Home from './pages/Home.jsx'
+import Home from './pages/HomePage/Home.jsx'
 import SearchPage from './pages/SearchPage.jsx'
 import IndividualResult from './components/SearchMain/IndividualResult/IndividualResult.jsx'
+import NotAvailable from './pages/NotAvailable/NotAvailable.jsx'
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,8 @@ const router = createBrowserRouter([
         path:"/recipe/:id",
         element: <IndividualResult/>
       }
-    ]
+    ], 
+    errorElement: <NotAvailable />
   }
 ])
 

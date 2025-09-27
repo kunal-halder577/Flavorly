@@ -6,7 +6,7 @@ export default function SearchContent() {
         <div className="container w-full h-full flex flex-col">
             <div className="p-2 h-full relative flex flex-col gap-6">
                 <SearchHeroSection className={""}/>
-                <SearchResults label="Recipes for you" />
+                <SearchResults label="Recipes for you" rowsPerPage={2} />
             </div>
         </div>
     )

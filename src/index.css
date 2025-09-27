@@ -5,7 +5,7 @@
 html, body, #root {
   height: 100%;
   margin: 0;
-  overflow: hidden; /* Prevents full-page scrolling */
+  overflow-x: hidden; /* Prevents full-page scrolling */
 }
 /* body {
   @apply font-poppins,

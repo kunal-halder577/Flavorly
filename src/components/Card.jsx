@@ -18,8 +18,8 @@ export default function Card({
     }
     return (
         <div 
-            className={`container cursor-pointer shadow-xl hover:shadow-2xl 
-            transition-shadow w-[16rem] h-[19.5rem] font-inter
+            className={`cursor-pointer shadow-xl hover:shadow-2xl 
+            transition-shadow h-[19.5rem] font-inter
             rounded-lg duration-200 ease-in-out ${className}`}
             onClick={onClickHandler}
         >

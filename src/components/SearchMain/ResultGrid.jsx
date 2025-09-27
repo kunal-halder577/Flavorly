@@ -4,7 +4,7 @@ import SkeletonCard from "../SkeletonCard";
 import Card from "../Card";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export default function ResultGrid({resultWindow=[], number=16}) {
+export default function ResultGrid({resultWindow=[], number=16, ref}) {
     const { resultLoading } = useContext(FilterContext);
     const skeletons = useMemo(() =>
         Array.from({ length: number }).map((_, i) => <SkeletonCard key={i} />),
@@ -13,8 +13,17 @@ export default function ResultGrid({resultWindow=[], number=16}) {
     const location = useLocation();
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-1
-            md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        // <div className="grid grid-cols-1 sm:grid-cols-1
+        //     md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 border">
+        <div className="grid gap-4 grid-cols-1
+              sm:grid-cols-2
+              md:grid-cols-3
+              lg:grid-cols-4
+              xl:grid-cols-5
+             "
+            ref={ref}
+        >
+
                 {resultLoading?
                     skeletons :
                     resultWindow.length > 0? 

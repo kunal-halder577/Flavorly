@@ -3,12 +3,15 @@ import FilterContext from "../../context/FilterContext"
 import Pagination from "./Pagination/Pagination"
 import ResultGrid from "./ResultGrid"
 import { useLocation, useSearchParams } from "react-router-dom";
+import useGridColumns from "../../hooks/useGridColumns";
 
 export default function SearchResults({
     label="",
-    number=8,
+    rowsPerPage=2,
 }) {
     const { searchResults } = useContext(FilterContext);
+    const [gridRef, columns] = useGridColumns();
+    const number = rowsPerPage * columns;
     const location = useLocation();
     //For Pagination
     const [searchParams, setSearchParams] = useSearchParams();
@@ -19,9 +22,8 @@ export default function SearchResults({
     const resultWindow = useMemo(() => {
         return searchResults.slice(windowStartIndex, windowStartIndex + number);
     }, [searchResults, windowStartIndex, number]);
-
     const pageNo = Math.ceil(searchResults.length / number);
-
+    
     useEffect(() => {
         if(!searchParams.get("page")) {
             const current = Object.fromEntries(searchParams.entries())
@@ -36,25 +38,15 @@ export default function SearchResults({
     }, [searchResults, page, pageNo, searchParams, setSearchParams])
     
     const nextPageHandler = useCallback(() => {
-        // setWindowStartIndex(prevStartIndex => (
-        //     searchResults.length-1 < prevStartIndex + number?
-        //     prevStartIndex : prevStartIndex + number
-        // ))
         const current = Object.fromEntries(searchParams.entries());
         if(page < pageNo) setSearchParams({...current, page: page+1});
     }, [setSearchParams, page, pageNo, searchParams])
 
     const prevPageHandler = useCallback(() => {
-        // setWindowStartIndex(prevStartIndex => (
-        //     Math.max(prevStartIndex - number, 0)
-        // ))
         const current = Object.fromEntries(searchParams.entries());
         if(page > 1) setSearchParams({...current, page : page - 1})
     }, [page, setSearchParams, searchParams])
 
-    // const windowStartIndexHandler = useCallback((value) => {
-    //     setWindowStartIndex(value)
-    // }, [])
     const goToPageHandler = useCallback((page) => {
         const current = Object.fromEntries(searchParams.entries());
         setSearchParams({ ...current, page })
@@ -72,7 +64,7 @@ export default function SearchResults({
     
     return (
         <div 
-            className="w-full h-fit p-4 pt-0 flex flex-col gap-4"
+            className="w-full h-fit p-4 pt-0 flex flex-col gap-10 items-center"
         >
             {label && 
                 <h2 className="text-2xl font-semibold">
@@ -85,7 +77,7 @@ export default function SearchResults({
                 </h2>
             }
             
-            <ResultGrid resultWindow={resultWindow} number={number}/>
+            <ResultGrid ref={gridRef} resultWindow={resultWindow} number={number}/>
             <Pagination
                 pageNumber={pageNo}
                 windowSize={number}

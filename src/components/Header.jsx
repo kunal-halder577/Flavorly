@@ -27,7 +27,8 @@ export default function Header({className=""}) {
         }
     ]
     return (
-        <header className={`relative h-full px-4 w-full shadow-[-0px_0px_24px_-6px_rgba(0,0,0,0.6)] overflow-hidden ${className}`}>
+        <header className={`relative h-full bg-white/70 px-4 w-full border-b border-black/15 backdrop-blur-lg shadow-[0_2px_6px_-1px_rgba(0,0,0,0.2)] overflow-hidden ${className}`}
+        >
                 <section className="w-full flex items-center justify-between h-full">
                     <section className="logo cursor-pointer text-2xl font-medium text-orange-400">
                         <Link to={`/`}>

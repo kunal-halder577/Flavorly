@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./App.css";
-import HeroSection from "./components/HeroSection";
 import Header from "./components/Header";
 import Filter from "./components/Filter/SearchFilter";
 import FilterProvider from "./context/FilterProvider";
@@ -11,8 +10,8 @@ import { Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <div className="flex flex-col w-screen h-screen overflow-hidden">
-      <div className="header-container h-[7vh]">
+    <div className="relative flex flex-col w-screen min-h-screen">
+      <div className="header-container h-[7vh] sticky top-0 z-10 backdrop-blur-lg">
         <Header />
       </div>
       {/* <HeroSection /> */}

@@ -9,8 +9,9 @@ export default {
     extend: {
       fontFamily: {
         playfair: ['"Playfair Display"', 'serif'],
-        poppins: ['Poppins', 'sans-serif'],
-        inter: ['Inter', 'sans-serif']
+         poppins: ["Poppins", "sans-serif"], // custom shortcut
+        inter: ['Inter', 'sans-serif'],
+        
       },
     },
   },
