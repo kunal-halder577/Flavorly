@@ -142,7 +142,7 @@ export default function HeroSection() {
         <div className="relative">
           <div className="absolute -top-10 -right-10 w-80 h-80 bg-orange-400 rounded-full blur-3xl opacity-30 -z-10"></div>
           <img
-            src="../../Layer 0.png"
+            src="/biriyani3.webp"
             loading="lazy"
             alt="heroImage"
             className="w-[500px] h-auto drop-shadow-3xl rounded-2xl"
