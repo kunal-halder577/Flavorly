@@ -28,8 +28,6 @@ export async function getFilteredSearchResults(filters={}, number=16) {
     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
     .join('&');
     const url = `${api}?${queryString}&addRecipeInformation=true&number=${number}${apiKeyParam}`
-    console.log(url);
-    
     try {
         const res = await fetch(url);
         const data = await res.json();
@@ -76,8 +74,7 @@ export async function getAllResults(query = "", filters = {}, number = 100, { si
             .join("&");
     }
 
-    const url = `${api}?${queryString ? queryString + "&" : ""}addRecipeInformation=true&number=${number}${apiKeyParam}`;
-    console.log("Final URL:", url);
+    const url = `${api}?${queryString ? queryString + "&" : ""}addRecipeInformation=true&number=${number}${apiKeyParam}`
 
     try {
         const res = await fetch(url, { signal });
