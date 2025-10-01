@@ -84,13 +84,13 @@ export default function FilterSearch({
         <div
             className={`container relative flex flex-col justify-center ${className}`}
         >
-            <div className="input-container border rounded-lg border-gray-800 flex text-xl focus:border-gray-950">
+            <div className="input-container border rounded-lg border-gray-800 flex focus:border-gray-950 pr-4">
                 <Input
                     type="text"
                     ref={inputRef}
                     placeholder={placeholder}
                     className="border-none bg-white w-[90%] rounded-lg"
-                    inputClassName="w-full rounded-lg"
+                    inputClassName="w-full rounded-lg text-base sm:text-xl"
                     value={searchQuery}
                     onChange={(e) => handleSearchQuery(e.target.value)}
                 />
@@ -132,7 +132,7 @@ export default function FilterSearch({
                                         aria-selected={isFocused}
                                     >
                                         <button 
-                                            className={`w-full text-xl text-left font-[360] px-3 py-[0.1rem] cursor-pointer ${isFocused ? "bg-orange-200" : "bg-white hover:bg-orange-100"}`}
+                                            className={`w-full text-base sm:text-xl text-left font-[360] px-3 py-[0.1rem] cursor-pointer ${isFocused ? "bg-orange-200" : "bg-white hover:bg-orange-100"}`}
                                             onClick={() => { 
                                                 handleSelect(getCurrentObject(option));
                                                 setFocusedIndex(-1);

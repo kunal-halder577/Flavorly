@@ -64,10 +64,10 @@ export default function SearchResults({
     
     return (
         <div 
-            className="w-full h-fit p-4 pt-0 flex flex-col gap-10 items-center"
+            className="w-full h-fit p-4 pt-0 flex flex-col gap-10 items-center justify-center"
         >
             {label && 
-                <h2 className="text-2xl font-semibold">
+                <h2 className="text-2xl font-semibold text-gray-500">
                 {`${label}: 
                     ${searchResults.length > 0?
                         `${searchResults.length} result${searchResults.length >1? `s`:``}`
@@ -75,8 +75,7 @@ export default function SearchResults({
                     ``}
                 `}
                 </h2>
-            }
-            
+            }     
             <ResultGrid ref={gridRef} resultWindow={resultWindow} number={number}/>
             <Pagination
                 pageNumber={pageNo}

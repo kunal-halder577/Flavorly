@@ -23,11 +23,11 @@ export default function IngredientFilter() {
     const offClasses = `bg-gray-300 hover:bg-gray-400 text-black focus:ring-black`;
 
     return (
-        <div className="container p-2 flex flex-col gap-y-2">
-            <p className="text-[1.35rem] font-[380]">Ingredients:</p>
+        <div className="p-2 flex flex-col gap-y-2">
+            <p className="text-lg sm:text-[1.35rem] font-[450]">Ingredients:</p>
             <div className="controls">
                 <button 
-                    className={`text-lg px-3 py-[0.1px] rounded-l-lg cursor-pointer
+                    className={`text-base sm:text-lg px-3 py-[0.1px] rounded-l-lg cursor-pointer
                         duration-200 ease-in-out focus:outline-0 focus:ring focus:ring-offset-2 focus:ring-offset-white
                     ${isIncluded? onClasses : offClasses}`}
                     onClick={toggleIncludeOn}
@@ -36,7 +36,7 @@ export default function IngredientFilter() {
                     Include
                 </button>
                 <button 
-                    className={`text-lg px-3 py-[0.1px] rounded-r-lg cursor-pointer
+                    className={`text-base sm:text-lg px-3 py-[0.1px] rounded-r-lg cursor-pointer
                     duration-200 ease-in-out focus:outline-0 focus:ring focus:ring-offset-2 focus:ring-offset-white
                     ${!isIncluded? onClasses : offClasses}`}
                     onClick={toggleIncludeOff}

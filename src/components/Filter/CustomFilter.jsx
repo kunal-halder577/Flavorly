@@ -18,7 +18,7 @@ export default function CustomFilter({
 
     return (
         <div className="w-full  flex flex-col gap-y-2 p-2">
-            <p className="text-[1.35rem] font-[380]">{label+":"}</p>
+            <p className="text-lg sm:text-[1.35rem] font-[450]">{label+":"}</p>
             <FilterSearch
                 className="w-[90%]"
                 searchQuery={searchQuery}
@@ -30,7 +30,7 @@ export default function CustomFilter({
                 dataList={staticData[type]?.others}
             />
             <div className="quick-cuisines w-full flex flex-col gap-y-2">
-                <p className="text-xl font-[370] underline-offset-2 underline">Quick:</p>
+                <p className="text-lg sm:text-xl font-[450] underline-offset-2 underline">Quick:</p>
                 <QuickSelect 
                     className="w-full"
                     type={type} 

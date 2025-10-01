@@ -9,7 +9,7 @@ export default function NotAvailable() {
         <div className="header-container h-[7vh] sticky top-0 z-10 backdrop-blur-lg">
             <Header />
         </div>
-      <main className="flex flex-1 items-center justify-center px-6">
+      <main className="flex flex-1 items-center justify-center px-6 py-8 md:py-2">
         <div className="max-w-md w-full text-center">
           <div className="mx-auto w-16 h-16 flex items-center justify-center rounded-full bg-orange-100">
             <AlertTriangle className="h-10 w-10 text-orange-500" />

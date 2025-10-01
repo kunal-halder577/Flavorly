@@ -17,7 +17,7 @@ export default React.forwardRef(function Input({
                 type={type} 
                 ref={ref}
                 placeholder={placeholder}
-                className={`h-[4.5vh] px-3 outline-none py-2 text-xl text-black duration-200 focus:bg-gray-50 ${inputClassName}`}
+                className={`h-[4.5vh] px-3 outline-none py-2 text-black duration-200 focus:bg-gray-50 ${inputClassName}`}
                 {...props}
                 id={id}
             />

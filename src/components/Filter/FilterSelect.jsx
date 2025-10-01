@@ -82,7 +82,7 @@ export default function FilterSelect({
             ref={dropdownRef} 
             className="time-container flex flex-col gap-y-2 w-full p-2"
         >
-            <p className="text-[1.35rem] font-[380]">
+            <p className="text-lg sm:text-[1.35rem] font-[450]">
                 {label? label:"Your Label Here:"}
             </p>
             <div className="relative w-full h-full flex flex-col">
@@ -98,11 +98,11 @@ export default function FilterSelect({
                     aria-haspopup="listbox"
                 >
                     <button 
-                        className="w-[90%] px-2 py-1 text-left rounded-l-lg text-xl text-gray-500 cursor-pointer focus:outline-0 focus:bg-gray-50 duration-200 focus:ring focus:ring-gray-600"    
+                        className="w-[90%] px-2 py-1 text-left rounded-l-lg text-base sm:text-xl text-gray-500 cursor-pointer focus:outline-0 focus:bg-gray-50 duration-200 focus:ring focus:ring-gray-600"    
                     >
                         {value}
                     </button>
-                    <div className={`dropdown h-full bg-amber-400 text-white w-[10%] border-gray-500 flex items-center justify-center border-0 border-l focus:bg-gray-50 cursor-pointer`}>
+                    <div className={`dropdown rounded-r-lg py-2.5 h-full bg-amber-400 text-white w-[10%] border-gray-500 flex items-center justify-center focus:bg-gray-50 cursor-pointer`}>
                         <FontAwesomeIcon
                             icon={open? faCaretUp : faCaretDown}
                             className=""
@@ -126,7 +126,7 @@ export default function FilterSelect({
                                     >
                                         <button
                                             ref={(el) => itemRefs.current[index] = el}
-                                            className={`w-full px-3 py-[0.1rem] text-left font-[360] text-xl duration-50 cursor-pointer ${isFocused? "bg-orange-200 font-[490]" : "bg-white hover: hover:bg-orange-100"}`}
+                                            className={`w-full px-3 py-[0.1rem] text-left font-[360] text-base sm:text-xl duration-50 cursor-pointer ${isFocused? "bg-orange-200 font-[490]" : "bg-white hover: hover:bg-orange-100"}`}
                                             onClick={() => {
                                                 setOpen(false);
                                                 setFocusedIndex(-1);

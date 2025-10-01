@@ -2,7 +2,7 @@ import ButtonPrev from "./ButtonPrev";
 import ButtonNext from "./ButtonNext";
 import ButtonPage from "./ButtonPage";
 import PageButtons from "./PageButtons";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export default function Pagination({
@@ -14,6 +14,7 @@ export default function Pagination({
     const [searchParams] = useSearchParams();
     const currentPage = Number(searchParams.get("page")) || 1; 
     const [buttonPointer, setButtonPointer] = useState(0);
+    const [buttonNumbers, setButtonNumbers] = useState(3);
     const {prev: prevPageHandler, next: nextPageHandler, goToPage: goToPageHandler} = handlers;
     const {prev: prevDisabled, next: nextDisabled} = disabled;
     const prevButtonPointerHandler = () => {
@@ -32,15 +33,32 @@ export default function Pagination({
             setButtonPointer(currentPage - 1);
         }
     }, [currentPage, pageNumber])
-    
+   useEffect(() => {
+        const handleResize = () => {
+            const width = window.innerWidth;
+            if (width < 350) {
+            setButtonNumbers(1);
+            } else if (width < 400) {
+            setButtonNumbers(2);
+            } else {
+            setButtonNumbers(3);
+            }
+        };
+        handleResize();
+        window.addEventListener("resize", handleResize);
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+
     return (
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full justify-center">
             <ButtonPrev 
                 isDisabled={prevDisabled} 
                 prevHandlers={[prevPageHandler, prevButtonPointerHandler]}
             />
             <PageButtons 
-                buttonNumber={3}
+                buttonNumber={buttonNumbers}
                 displayLastPageButton
                 windowSize={windowSize}
                 pageNumber={pageNumber}

@@ -39,6 +39,5 @@ export default function useIngredients(query="", number=15, debounceTime=300) {
     },[query, number, debounceTime])
 
     const arrayOfResult = ingredients.map(ingredient => ingredient.name);
-    console.log(ingredients)
     return {arrayOfResult, loading};
 }

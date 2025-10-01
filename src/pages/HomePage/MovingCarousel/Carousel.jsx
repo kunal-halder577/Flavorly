@@ -10771,15 +10771,16 @@ export default function Carousel() {
         breakpoints={{
           320: { slidesPerView: 1 }, // Mobile
           640: { slidesPerView: 2 }, // Tablet
+          768: { slidesPerView: 3 },
           1024: { slidesPerView: 4 }, // Desktop
         }}
-        style={{paddingLeft: 50, paddingRight: 50}}
+        style={{paddingLeft: '5%', paddingRight: '5%'}}
+        grabCursor={true}
       >
         {
           data.map(recipe => (
             <SwiperSlide key={recipe.id}>
               <Card
-                key={recipe.id}
                 time={recipe.readyInMinutes}
                 diet={recipe.diets}
                 dishType={recipe.dishTypes}

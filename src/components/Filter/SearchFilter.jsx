@@ -41,17 +41,17 @@ export default function Filter() {
         })
     }
     return (
-        <div className="relative container w-full h-full px-2 py-1 border border-black">
+        <div className="relative h-screen container w-full px-2 py-1 border border-black">
             <div className="w-full sticky top-0 z-10 py-1 flex items-center justify-between px-2">
-                <h1 className="text-3xl font-[450] font-poppins">Filters</h1>
+                <h1 className="text-2xl sm:text-3xl font-[450] font-poppins">Filters</h1>
                 <button
-                    className="text-lg text-orange-500 px-3 py-0.5 rounded-full cursor-pointer font-[640] hover:text-orange-600 duration-200 focus:underline focus:outline-none focus:text-orange-600 underline-offset-3 decoration-2"
+                    className="text-base sm:text-lg text-orange-500 px-3 py-0.5 rounded-full cursor-pointer font-[640] hover:text-orange-600 duration-200 focus:underline focus:outline-none focus:text-orange-600 underline-offset-3 decoration-2"
                     onClick={() => {handleFilteredSearch(100)}}
                 >
                     Apply filters
                 </button>
             </div>
-            <section className="flex flex-col gap flex-1 pr-1 border border-black rounded-lg h-[93%] overflow-y-auto bg-white">
+            <section className="flex flex-col gap flex-1 pr-1 border border-black rounded-lg max-h-[86.5vh] overflow-y-auto bg-white">
                 <CuisineFilter />
                 <MealTypeFilter />
                 <DietFilter />

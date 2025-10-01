@@ -106,19 +106,18 @@ export default function HeroSection() {
       <div className="flex flex-col md:flex-row items-center justify-between px-6 md:px-16 gap-10 w-full">
         {/* Left Side Text */}
         <div className="flex flex-col gap-6 max-w-xl">
-          <h1 className="text-4xl md:text-5xl font-playfair font-semibold leading-tight text-gray-900">
+          <h1 className="text-4xl z-0 md:text-5xl font-playfair font-semibold leading-tight text-white md:text-gray-900">
             Fresh Recipes for a{" "}
-            <span className="text-orange-500">Healthier You</span>
+            <span className="z-0 text-white md:text-orange-500">Healthier You</span>
           </h1>
-          <p className="text-lg md:text-xl font-poppins text-gray-600">
+          <p className="text-lg z-0 font-semibold md:font-normal md:text-xl font-poppins text-gray-100 md:text-gray-800">
             Browse hundreds of tested recipes for quick dinners, sweet treats,
             and everything in between.
           </p>
 
           <div className="flex gap-4 mt-4">
             <Button
-              className="
-                relative px-4 py-1 font-semibold text-white shadow-xl
+              className="z-0 px-4 py-1 font-semibold text-white shadow-xl
                 bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400
                 bg-[length:200%_200%] bg-left
                 transition-all duration-300 ease-in-out
@@ -131,7 +130,7 @@ export default function HeroSection() {
             </Button>
 
             <Button
-              className="bg-white shadow-xl text-amber-500 hover:text-orange-600 text-lg px-4 py-1 underline-offset-2 decoration-2 focus:text-orange-600 font-semibold hover:bg-gray-200 focus:outline-0"
+              className="z-0 bg-white shadow-xl text-amber-500 hover:text-orange-600 text-lg px-4 py-1 underline-offset-2 decoration-2 focus:text-orange-600 font-semibold hover:bg-gray-100 focus:outline-0"
               onClick={() => navigate("/about")}
             >
               Learn More

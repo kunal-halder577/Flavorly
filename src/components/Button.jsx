@@ -29,8 +29,8 @@ export default function Button({
   return (
     <button
       type={type}
-      className={`appearance-none transition duration-200 ease-in-out rounded-full cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed
-        focus:outline-none focus-visible:ring-2 
+      className={`appearance-none transition-all duration-200 ease-in-out rounded-full cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed
+        focus:outline-none  
         ${ring ? "focus:ring-2" : ""}
         ${underline ? "focus:underline" : ""}
         ${bgColor} ${className}`}

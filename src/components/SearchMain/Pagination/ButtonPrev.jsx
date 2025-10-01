@@ -6,7 +6,7 @@ export default function ButtonPrev({
 }) {
     return (
         <PaginationButton
-            label="Previous"
+            label={window.innerWidth < 640? "Prev" : "Previous"}
             type="Prev"
             isDisabled={isDisabled}
             handlers={prevHandlers}

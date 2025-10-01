@@ -7,7 +7,7 @@ export default function Newsletter() {
               <h3 className="text-sm font-semibold text-gray-700">Join our newsletter</h3>
               <p className="text-sm text-gray-600">Get seasonal recipes and tips — once a week.</p>
 
-              <form className="flex gap-2 mt-2" onSubmit={(e) => e.preventDefault()}>
+              <form className="flex flex-col md:flex-row gap-2 mt-2" onSubmit={(e) => e.preventDefault()}>
                 <input
                   type="email"
                   placeholder="you@sample.com"
