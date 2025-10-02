@@ -7,7 +7,3 @@ html, body, #root {
   margin: 0;
   overflow-x: hidden; /* Prevents full-page scrolling */
 }
-/* body {
-  @apply font-poppins,
-  @apply font-playfair
-} */
