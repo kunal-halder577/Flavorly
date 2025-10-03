@@ -7,6 +7,7 @@ const keys = [
   process.env.API_KEY_1,
   process.env.API_KEY_2,
   process.env.API_KEY_3,
+  process.env.API_KEY_4
 ];
 
 export default async function handler(req, res) {
