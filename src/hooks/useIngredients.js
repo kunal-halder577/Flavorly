@@ -17,7 +17,7 @@ export default function useIngredients(query="", number=15, debounceTime=300) {
             async () => {
                 try {
                     const res = await fetch(
-                        `api/proxy/food/ingredients/autocomplete?query=${query}&number=${number}`,
+                        `/api/proxy/food/ingredients/autocomplete?query=${query}&number=${number}`,
                         {signal : controller.signal}
                     );
                     console.log(res);

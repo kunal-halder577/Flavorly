@@ -1,5 +1,5 @@
 export async function getSearchResult(query = "", number=10) {
-    const url = `api/proxy/recipes/complexSearch?query=${query}&addRecipeInformation=true&number=${number}`
+    const url = `/api/proxy/recipes/complexSearch?query=${query}&addRecipeInformation=true&number=${number}`
     try {
         const res = await fetch(url);
         const data = await res.json();
@@ -22,7 +22,7 @@ export async function getFilteredSearchResults(filters={}, number=16) {
     .filter(([_, value]) => value)
     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
     .join('&');
-    const url = `api/proxy/recipes/complexSearch?${queryString}&addRecipeInformation=true&number=${number}`
+    const url = `/api/proxy/recipes/complexSearch?${queryString}&addRecipeInformation=true&number=${number}`
     try {
         const res = await fetch(url);
         const data = await res.json();
@@ -69,7 +69,7 @@ export async function getAllResults(query = "", filters = {}, number = 100, { si
             .join("&");
     }
 
-    const url = `api/proxy/recipes/complexSearch?${queryString ? queryString + "&" : ""}addRecipeInformation=true&number=${number}`
+    const url = `/api/proxy/recipes/complexSearch?${queryString ? queryString + "&" : ""}addRecipeInformation=true&number=${number}`
 
     try {
         const res = await fetch(url, { signal });
