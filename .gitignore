@@ -25,3 +25,7 @@ dist-ssr
 # Environment files
 .env
 .env.*
+.vercel
+#local routes
+api/proxy/food
+api/proxy/recipes

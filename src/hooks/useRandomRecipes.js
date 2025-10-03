@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import apiKey from "../config";
 
 export default function useRandomRecipes(number=100) {
     const [searchResults, setSearchResults] = useState([]);
@@ -9,7 +8,8 @@ export default function useRandomRecipes(number=100) {
         const controller = new AbortController();
         const fetchData = async () => {
             setLoading(true);
-            const url = `https://api.spoonacular.com/recipes/random?number=${number}&apiKey=${apiKey}`;
+            const apibase = import.meta.env.DEV? "http://localhost:3000" : "";
+            const url = `${apibase}/api/proxy/recipes/random?number=${number}`;
             try {
                 const res = await fetch(url, {signal: controller.signal});
                 const data = await res.json();
@@ -29,7 +29,6 @@ export default function useRandomRecipes(number=100) {
         return () => controller.abort();
     }
     , [number])
-    // console.log(searchResults);
     
     return {searchResults, searchResultHandler, loading};
 }

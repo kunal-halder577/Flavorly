@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import apiKey from "../config";
 
 export default function useIngredients(query="", number=15, debounceTime=300) {
     const [ingredients, setIngredients] = useState([]);
@@ -18,10 +17,12 @@ export default function useIngredients(query="", number=15, debounceTime=300) {
             async () => {
                 try {
                     const res = await fetch(
-                        `https://api.spoonacular.com/food/ingredients/autocomplete?query=${query}&number=${number}&apiKey=${apiKey}`,
+                        `api/proxy/food/ingredients/autocomplete?query=${query}&number=${number}`,
                         {signal : controller.signal}
                     );
+                    console.log(res);
                     const data = await res.json();
+                    
                     setIngredients(data);
                 } catch(err) {
                     if (!(err instanceof DOMException && err.name === 'AbortError')) {

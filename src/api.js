@@ -1,10 +1,5 @@
-import apiKey from "./config";
-
-const api = `https://api.spoonacular.com/recipes/complexSearch`;
-const apiKeyParam = `&apiKey=${apiKey}`
-
 export async function getSearchResult(query = "", number=10) {
-    const url = `${api}?query=${query}&addRecipeInformation=true&number=${number}${apiKeyParam}`
+    const url = `api/proxy/recipes/complexSearch?query=${query}&addRecipeInformation=true&number=${number}`
     try {
         const res = await fetch(url);
         const data = await res.json();
@@ -27,7 +22,7 @@ export async function getFilteredSearchResults(filters={}, number=16) {
     .filter(([_, value]) => value)
     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
     .join('&');
-    const url = `${api}?${queryString}&addRecipeInformation=true&number=${number}${apiKeyParam}`
+    const url = `api/proxy/recipes/complexSearch?${queryString}&addRecipeInformation=true&number=${number}`
     try {
         const res = await fetch(url);
         const data = await res.json();
@@ -37,7 +32,7 @@ export async function getFilteredSearchResults(filters={}, number=16) {
     }
 }
 export async function getDetailedResult(id=648257) {
-    const url = `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true${apiKeyParam}`
+    const url = `/api/proxy/recipes/${id}/information?includeNutrition=true`
     try {
         const res = await fetch(url);
         if (!res.ok) {
@@ -74,7 +69,7 @@ export async function getAllResults(query = "", filters = {}, number = 100, { si
             .join("&");
     }
 
-    const url = `${api}?${queryString ? queryString + "&" : ""}addRecipeInformation=true&number=${number}${apiKeyParam}`
+    const url = `api/proxy/recipes/complexSearch?${queryString ? queryString + "&" : ""}addRecipeInformation=true&number=${number}`
 
     try {
         const res = await fetch(url, { signal });
