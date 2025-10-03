@@ -27,5 +27,3 @@ dist-ssr
 .env.*
 .vercel
 #local routes
-api/proxy/food
-api/proxy/recipes
