@@ -1,4 +1,4 @@
-import { proxyRequest } from "../../proxyApi";
+import { proxyRequest } from "../../proxyApi.js";
 
 export default async function handler(req, res) {
   const result = await proxyRequest(req);
