@@ -74,7 +74,6 @@ export default function SearchBar({
                     <button 
                         className="w-[7%] cursor-pointer duration-200 ease-in-out hover:bg-gray-50 h-full rounded-r-full" 
                         onClick={() => {
-                            console.log(searchQuery.dish); 
                             handleDishSearchQuery("")
                         }}
                     >

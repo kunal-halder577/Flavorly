@@ -24,7 +24,7 @@ export default function QuickSelect({
                             label={label}
                             cancelAvail={false}
                             isSelected={isSelected}
-                            handleSelect={() => {handleSelect({source:"popular", filter:{id, label}});console.log(selectedFilters?.[type]?.popular)}}
+                            handleSelect={() => {handleSelect({source:"popular", filter:{id, label}})}}
                             handleDelete={() => {handleDelete("popular", id)}}
                         />
             })}

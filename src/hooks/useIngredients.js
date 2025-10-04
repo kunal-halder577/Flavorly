@@ -20,9 +20,7 @@ export default function useIngredients(query="", number=15, debounceTime=300) {
                         `/api/proxy/food/ingredients/autocomplete?query=${query}&number=${number}`,
                         {signal : controller.signal}
                     );
-                    console.log(res);
                     const data = await res.json();
-                    
                     setIngredients(data);
                 } catch(err) {
                     if (!(err instanceof DOMException && err.name === 'AbortError')) {
