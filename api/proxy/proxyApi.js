@@ -2,9 +2,11 @@
 import { TransactionalEmailsApi, SendSmtpEmail } from "@getbrevo/brevo";
 
 let currentKeyIndex = 0;
+let lastNotificationTime = 0;
 
 const RETRY_STATUS_CODES = [402, 401, 429];
 const RETURN_DIRECTLY_CODES = [404, 403];
+const NOTIFY_COOLDOWN = 1000 * 60 * 10;
 
 const keys = [
   process.env.API_KEY_1,
@@ -18,6 +20,13 @@ const emailAPI = new TransactionalEmailsApi();
 emailAPI.authentications.apiKey.apiKey = process.env.BREVO_API_KEY;
 
 async function notifyAdmin(errorMessage) {
+  const now = Date.now();
+  if (now - lastNotificationTime < NOTIFY_COOLDOWN) {
+    console.log("Skipping duplicate notification.");
+    return;
+  }
+  lastNotificationTime = now;
+
   const message = new SendSmtpEmail();
   message.subject = "🚨 All API Keys Exhausted!";
   message.htmlContent = `<p>${errorMessage}</p>`;
