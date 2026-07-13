@@ -1,0 +1,21 @@
+.swiper-button-prev,
+.swiper-button-next {
+  color: orange;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 28px!important;
+  font-weight: bold!important;    /* makes it thicker */
+  color: #222;          /* arrow color */
+}
+.swiper-pagination-bullet {
+  background: orange;
+  opacity: 0.6;
+}
+.swiper-pagination-bullet-active {
+  background: #ff6600;
+  opacity: 1;
+}
